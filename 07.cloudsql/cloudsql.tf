@@ -24,11 +24,11 @@ resource "google_sql_database_instance" "instance" {
   provider = google-beta
 
   name             = "private-instance-${random_id.db_name_suffix.hex}"
-  region           = "us-central1"
+  region           = "asia-northeast3"
   database_version = "MYSQL_5_7"
 
-  depends_on = [google_service_networking_connection.private_vpc_connection]
-  
+  depends_on          = [google_service_networking_connection.private_vpc_connection]
+  deletion_protection = false
   settings {
     tier = "db-n1-standard-2"
     ip_configuration {

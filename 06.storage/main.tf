@@ -43,8 +43,8 @@ resource "google_service_account" "sa" {
 }
 resource "google_project_iam_member" "project-roles" {
   project = var.project_id
-    member  = "serviceAccount:${google_service_account.sa.email}"
-    role    = "roles/storage.objectAdmin"
+  member  = "serviceAccount:${google_service_account.sa.email}"
+  role    = "roles/storage.objectAdmin"
 }
 
 

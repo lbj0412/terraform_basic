@@ -11,10 +11,10 @@ resource "google_compute_subnetwork" "subnetwork" {
   depends_on = [
     google_compute_network.vpc_network
   ]
-  name          = var.subnetwork_name
-  ip_cidr_range = "10.0.0.0/24"
-  region        = "asia-northeast3"
-  network       = var.vpc_name
+  name                     = var.subnetwork_name
+  ip_cidr_range            = "10.0.0.0/24"
+  region                   = "asia-northeast3"
+  network                  = var.vpc_name
   private_ip_google_access = true
 }
 
