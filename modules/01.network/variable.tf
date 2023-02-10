@@ -1,14 +1,14 @@
 variable "project_id" {
   type        = string
-  description = "description"
+  description = "project_id"
 }
 
 variable "vpc_name" {
   type        = string
-  description = "description"
+  description = "vpc network name"
 }
 
 variable "subnetwork_name" {
   type        = string
-  description = "description"
+  description = "subnetwork name"
 }
