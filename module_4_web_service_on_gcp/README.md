@@ -1,4 +1,4 @@
-# GCP_Terraform Basic 
+# Web Service on GCP
 GCP에서 Terraform을 배우기 위한 기본 과정입니다.
 
 modules폴더 안의 리소스 이름에 해당하는 과정을 진행합니다.
