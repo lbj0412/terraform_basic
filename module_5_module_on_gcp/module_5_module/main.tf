@@ -7,18 +7,18 @@ provider "google" {
 
 ### network 설정
 module "network" {
-    source = "./modules/network"
-    project_id = var.project_id
-    vpc_name = "byungjun-test"
-    subnetwork_name = "byungjun-sbn"
+  source          = "./modules/network"
+  project_id      = var.project_id
+  vpc_name        = "byungjun-test"
+  subnetwork_name = "byungjun-sbn"
 }
 
 ### compute vm 설정
 module "compute-vm" {
-    source = "./modules/compute-vm"
-    vm_name = var.vm_name
-    network    = module.network.vpc_name
-    subnetwork = module.network.subnetwork
+  source     = "./modules/compute-vm"
+  vm_name    = var.vm_name
+  network    = module.network.vpc_name
+  subnetwork = module.network.subnetwork
 }
 
 resource "google_compute_firewall" "default" {

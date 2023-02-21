@@ -37,3 +37,9 @@ resource "google_sql_database_instance" "instance" {
     }
   }
 }
+
+resource "google_sql_user" "users" {
+  name     = "root"
+  instance = google_sql_database_instance.instance.name
+  password = "1234"
+}

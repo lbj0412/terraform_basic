@@ -7,10 +7,10 @@ provider "google" {
 
 ### 2. VPC 네트워크 생성
 resource "google_compute_network" "vpc_network" {
-  project                 = project_id
-  name                    = "vpc-network"
-  auto_create_subnetwork  = fasle
-  mtu                     = 1460 
+  project                = project_id
+  name                   = "vpc-network"
+  auto_create_subnetwork = fasle
+  mtu                    = 1460
 }
 
 ### 3. 서브넷 생성
@@ -66,5 +66,5 @@ resource "google_compute_firewall" "default" {
     ports    = ["80", "8080", "22"]
   }
   source_ranges = ["0.0.0.0/0"]
-  target_tags = ["web"]
+  target_tags   = ["web"]
 }

@@ -11,17 +11,17 @@ resource "google_service_account" "default" {
 
 module "network" {
   source          = "./modules/network"
-  for_each = var.resource_name
+  for_each        = var.resource_name
   project_id      = var.project_id
   vpc_name        = each.value.vpc_name
   subnetwork_name = each.value.subnetwork_name
 }
 module "compute-vm" {
-  source     = "./modules/compute-vm"
-  for_each = var.resource_name
-  vm_name    = each.value.vm_name
-  network    = module.network[each.key].vpc_name
-  subnetwork = module.network[each.key].subnetwork
+  source          = "./modules/compute-vm"
+  for_each        = var.resource_name
+  vm_name         = each.value.vm_name
+  network         = module.network[each.key].vpc_name
+  subnetwork      = module.network[each.key].subnetwork
   service_account = google_service_account.default.email
 }
 

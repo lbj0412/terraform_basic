@@ -7,10 +7,10 @@ provider "google" {
 
 ### 2. VPC 네트워크 생성
 resource "google_compute_network" "vpc_network" {
-  project                = var.project_id
-  name                   = var.vpc_name
+  project                 = var.project_id
+  name                    = var.vpc_name
   auto_create_subnetworks = false
-  mtu                    = 1460
+  mtu                     = 1460
 }
 
 ### 3. 서브넷 생성
@@ -97,7 +97,7 @@ output "instance_ip" {
 
 ### 8. random_string 생성
 resource "random_string" "random" {
-  count = 4
+  count   = 4
   length  = 4
   special = false
   upper   = false

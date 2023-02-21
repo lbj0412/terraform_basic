@@ -6,16 +6,16 @@ variable "project_id" {
 
 variable "resource_name" {
   default = {
-      prod = {
-          "vm_name" = "byungjun-prod-vm",
-          "vpc_name" = "byungjun-prod-vpc",
-          "subnetwork_name" = "byungjun-prod-sbn"
-      },
-      dev = {
-          "vm_name" = "byungjun-dev-vm",
-          "vpc_name" = "byungjun-dev-vpc",
-          "subnetwork_name" = "byungjun-dev-sbn"
-      }
+    prod = {
+      "vm_name"         = "byungjun-prod-vm",
+      "vpc_name"        = "byungjun-prod-vpc",
+      "subnetwork_name" = "byungjun-prod-sbn"
+    },
+    dev = {
+      "vm_name"         = "byungjun-dev-vm",
+      "vpc_name"        = "byungjun-dev-vpc",
+      "subnetwork_name" = "byungjun-dev-sbn"
+    }
   }
 }
 
@@ -33,7 +33,7 @@ variable "subnetwork_name" {
 }
 
 variable "vm_name" {
-  default = "vm" 
+  default     = "vm"
   type        = string
   description = "Test_VM"
 }

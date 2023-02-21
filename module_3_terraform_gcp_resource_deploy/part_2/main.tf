@@ -7,10 +7,10 @@ provider "google" {
 
 ### 2. VPC 네트워크 생성
 resource "google_compute_network" "vpc_network" {
-  project                = var.project_id
-  name                   = var.vpc_name
+  project                 = var.project_id
+  name                    = var.vpc_name
   auto_create_subnetworks = false
-  mtu                    = 1460
+  mtu                     = 1460
 }
 
 ### 3. 서브넷 생성
