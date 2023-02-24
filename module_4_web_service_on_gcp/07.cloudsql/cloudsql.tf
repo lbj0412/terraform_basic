@@ -39,7 +39,7 @@ resource "google_sql_database_instance" "instance" {
 }
 
 resource "google_sql_user" "users" {
-  name     = "root"
+  name     = var.db_username
   instance = google_sql_database_instance.instance.name
-  password = "1234"
+  password = var.db_password
 }

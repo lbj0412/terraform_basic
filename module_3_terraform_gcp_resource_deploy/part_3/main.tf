@@ -50,7 +50,7 @@ resource "google_compute_instance" "default" {
       // Ephemeral public IP
     }
   }
-
+  metadata_startup_script = file("./startup_script")
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     email  = google_service_account.default.email
@@ -81,15 +81,15 @@ output "instance_ip" {
   value = google_compute_instance.default.network_interface[0].access_config[0].nat_ip
 }
 
-### 7.1 output 복수의 vm이름과 IP 설정
-# output "vm_ip" {
+## 7.1 output 복수의 vm이름과 IP 설정
+# output "instance_ip" {
 #     value =  [for i in google_compute_instance.default :i.network_interface[0].network_ip]
 # }
-# output "vm_name" {
+# output "instance_name" {
 #     value =  [for i in google_compute_instance.default : i.name]
 # }
 
-### 7.2 output vm이름과 IP 동시설정
+## 7.2 output vm이름과 IP 동시설정
 # output "vm_name_ip" {
 #     value = {for i in google_compute_instance.default : i.name => "int:${i.network_interface[0].network_ip},ext:${i.network_interface[0].access_config[0].nat_ip}"}
 # }

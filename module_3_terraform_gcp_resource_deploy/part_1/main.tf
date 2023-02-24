@@ -32,7 +32,7 @@ resource "google_service_account" "default" {
 resource "google_compute_instance" "default" {
   name         = "test"
   machine_type = "e2-medium"
-  zone         = "asia-northeast3-a"
+  zone         = "us-central1-b"
 
   boot_disk {
     initialize_params {
