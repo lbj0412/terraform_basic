@@ -74,9 +74,6 @@ resource "google_compute_instance_template" "default" {
   }
   metadata_startup_script = <<EOF
     #!/bin/bash
-    apt-get update
-    apt-get -y install mysql-community-server
-    systemctl start mysql
     apt-get install -y apache2
     systemctl start apache2
     EOF

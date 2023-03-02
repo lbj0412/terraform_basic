@@ -74,12 +74,6 @@ resource "google_compute_instance_template" "default" {
   }
   metadata_startup_script = <<EOF
     #!/bin/bash
-    apt update && sudo apt -y  install wget
-    wget https://repo.mysql.com//mysql-apt-config_0.8.22-1_all.deb
-    dpkg -i mysql-apt-config_0.8.22-1_all.deb
-    apt-get update
-    apt-get -y install mysql-community-server
-    systemctl start mysql
     apt-get install -y apache2
     systemctl start apache2
     EOF
