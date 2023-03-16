@@ -15,6 +15,9 @@ resource "google_compute_network" "vpc_network" {
 
 ### 3. 서브넷 생성
 resource "google_compute_subnetwork" "subnetwork" {
+  depends_on = [
+    google_compute_network.vpc_network
+  ]
   name          = var.subnetwork_name
   ip_cidr_range = "10.2.0.0/16"
   region        = "asia-northeast3"

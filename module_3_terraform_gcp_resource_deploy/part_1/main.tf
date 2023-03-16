@@ -1,24 +1,27 @@
 ### 1. Provider 설정
 provider "google" {
-  project = "project_id"
-  region  = "us-central1"
-  zone    = "us-central1-a"
+  project = project_id
+  region  = "asia-northeast3"
+  zone    = "asia-northeast3-a"
 }
 
 ### 2. VPC 네트워크 생성
 resource "google_compute_network" "vpc_network" {
-  project                = project_id
-  name                   = "vpc-network"
-  auto_create_subnetwork = fasle
-  mtu                    = 1460
+  project                 = project_id
+  name                    = "tf-vpc-network"
+  auto_create_subnetworks = false
+  mtu                     = 1460
 }
 
 ### 3. 서브넷 생성
 resource "google_compute_subnetwork" "subnetwork" {
-  name          = "test-subnetwork"
+  depends_on = [
+    google_compute_network.vpc_network
+  ]
+  name          = "tf-subnetwork"
   ip_cidr_range = "10.2.0.0/16"
-  region        = "us-central1"
-  network       = "vpc-network"
+  region        = "asia-northeast3"
+  network       = "tf-vpc-network"
 }
 
 ### 4. 서비스 계정 생성
@@ -32,7 +35,7 @@ resource "google_service_account" "default" {
 resource "google_compute_instance" "default" {
   name         = "test"
   machine_type = "e2-medium"
-  zone         = "us-central1-b"
+  zone         = "asia-northeast3-a"
 
   boot_disk {
     initialize_params {
@@ -41,8 +44,8 @@ resource "google_compute_instance" "default" {
   }
   tags = ["web"]
   network_interface {
-    network    = "vpc-network"
-    subnetwork = [subnetwork_slef_link]
+    network    = "tf-vpc-network"
+    subnetwork = subnetwork_self_link
 
     access_config {
       // Ephemeral public IP
@@ -59,7 +62,7 @@ resource "google_compute_instance" "default" {
 ### 6. 방화벽 생성
 resource "google_compute_firewall" "default" {
   name    = "test-firewall"
-  network = "vpc-network"
+  network = "tf-vpc-network"
 
   allow {
     protocol = "tcp"
