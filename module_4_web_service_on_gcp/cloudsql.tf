@@ -24,22 +24,23 @@ resource "google_sql_database_instance" "instance" {
   provider = google-beta
 
   name             = "private-instance-${random_id.db_name_suffix.hex}"
-  region           = "asia-northeast3"
+  region           = var.region
   database_version = "MYSQL_5_7"
 
-  depends_on          = [google_service_networking_connection.private_vpc_connection]
+  depends_on = [google_service_networking_connection.private_vpc_connection]
   deletion_protection = false
   settings {
     tier = "db-n1-standard-2"
     ip_configuration {
-      ipv4_enabled    = false
-      private_network = google_compute_network.vpc_network.id
+      ipv4_enabled                                  = false
+      private_network                               = google_compute_network.vpc_network.id
+      enable_private_path_for_google_cloud_services = true
     }
   }
 }
 
 resource "google_sql_user" "users" {
-  name     = var.db_username
+  name     = "mysql-user"
   instance = google_sql_database_instance.instance.name
-  password = var.db_password
+  password = "changeme"
 }

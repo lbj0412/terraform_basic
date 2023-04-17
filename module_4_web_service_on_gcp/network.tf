@@ -1,4 +1,4 @@
-### VPC Network 생성 ###
+### VPC Network ###
 resource "google_compute_network" "vpc_network" {
   project                 = var.project_id
   name                    = var.vpc_name
@@ -6,26 +6,22 @@ resource "google_compute_network" "vpc_network" {
   mtu                     = 1460
 }
 
-### Subnetwork 생성 ###
+### subnetwork
 resource "google_compute_subnetwork" "subnetwork" {
+  name          = var.subnet_name
+  ip_cidr_range = var.cidr_range
+  region        = var.region
+  network       = google_compute_network.vpc_network.id
+}
+
+### router
+resource "google_compute_router" "router" {
   depends_on = [
     google_compute_network.vpc_network
   ]
-  name                     = var.subnetwork_name
-  ip_cidr_range            = "10.0.0.0/24"
-  region                   = "asia-northeast3"
-  network                  = var.vpc_name
-  private_ip_google_access = true
-}
-
-resource "google_compute_router" "router" {
   name    = "my-router"
-  region  = google_compute_subnetwork.subnetwork.region
-  network = google_compute_network.vpc_network.id
-
-  bgp {
-    asn = 64514
-  }
+  region  = var.region
+  network = var.vpc_name
 }
 
 resource "google_compute_router_nat" "nat" {
