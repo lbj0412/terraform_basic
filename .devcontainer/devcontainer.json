@@ -3,6 +3,9 @@
   "features": {
     "ghcr.io/dhoeric/features/google-cloud-cli:1": {
         "version": "latest"
+    },
+    "ghcr.io/devcontainers-contrib/features/terraform-asdf:2": {
+        "version": "latest"
+       }
     }
-}
 }
